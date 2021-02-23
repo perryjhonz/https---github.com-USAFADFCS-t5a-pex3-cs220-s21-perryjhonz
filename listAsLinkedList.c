@@ -27,6 +27,7 @@ void deleteLinkedList(LinkedList* list) {
     Node* temp2 = list->head;
     for (int i = 0; i < list->numberOfElements; i++) {
         temp2 = temp1->next;
+        free(temp1->data);
         free(temp1);
         temp1 = temp2;
     }
@@ -64,18 +65,27 @@ int lengthOfLinkedList(LinkedList* list) {
 void printLinkedList(LinkedList* list) {
     Node* temp1 = list->head;
     for (int i = 0; i < list->numberOfElements; i++) {
-        printf("%lf, ", temp1->data);
+        if (temp1->type == REAL_NUMBER) {
+            printf("%.3lf, ", *(double*)temp1->data);
+        }
+        else {
+            printf("%c, ", *(char*)temp1->data);
+        }
         temp1 = temp1->next;
     }
     printf("\n");
 }
 
 // retrieves element at a given position
-void* getElementLinkedList(LinkedList* list, int position) {
+void* getElementLinkedList(LinkedList* list, int position, ElementType* type) {
     Node* temp1 = list->head;
+    if (position >= list->numberOfElements) {
+        return NULL;
+    }
     for (int i = 0; i < position; i++) {
         temp1 = temp1->next;
     }
+    *type = temp1->type;
     return temp1->data;
 }
 
@@ -84,6 +94,7 @@ void deleteElementLinkedList(LinkedList* list, int position) {
     Node* temp1 = list->head;
     if (position == 0) {
         list->head = list->head->next;
+        free(temp1->data);
         free(temp1);
     }
     else {
@@ -91,6 +102,7 @@ void deleteElementLinkedList(LinkedList* list, int position) {
             temp1 = temp1->next;
         }
         Node* temp2 = temp1->next->next;
+        free(temp1->next->data);
         free(temp1->next);
         temp1->next = temp2;
         if (position == list->numberOfElements - 1) {
@@ -105,7 +117,7 @@ void deleteElementLinkedList(LinkedList* list, int position) {
 void insertElementLinkedList(LinkedList* list, int position, void* element, ElementType type) {
     Node* temp1 = list->head;
     Node* new = (Node*)malloc(sizeof(Node));
-    temp1->type = type;
+    new->type = type;
 
     new->data = element;
     new->next = NULL;
