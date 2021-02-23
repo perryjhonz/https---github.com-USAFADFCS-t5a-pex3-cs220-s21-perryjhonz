@@ -122,4 +122,13 @@ void insertElementLinkedList(LinkedList* list, int position, void* element, Elem
  */
 void changeElementLinkedList(LinkedList* list, int position, void* newElement, ElementType type);
 
+/** isEmpty()
+ * @brief  - determines if the list is empty
+ * @param list - a ptr to the list structure
+ * @return - true if the list is empty or false
+ * @pre    - list unmodified
+ * @post   - list unmodified; and empty status returned
+ */
+bool isEmpty(LinkedList* list);
+
 #endif  // LISTASLINKEDLIST_H

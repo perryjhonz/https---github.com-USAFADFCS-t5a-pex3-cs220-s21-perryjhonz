@@ -6,7 +6,6 @@
  * Purpose: List ADT as linked list
  * ===========================================================
  */
-
 #include "listAsLinkedList.h"
 
 #include <stdio.h>
@@ -41,6 +40,7 @@ void deleteLinkedList(LinkedList* list) {
 // addes a new element to the end of the linked list
 void appendElementLinkedList(LinkedList* list, void* element, ElementType type) {
     Node* temp1 = (Node*)malloc(sizeof(Node));
+    temp1->type = type;
 
     temp1->data = element;
     temp1->next = NULL;
@@ -55,10 +55,12 @@ void appendElementLinkedList(LinkedList* list, void* element, ElementType type) 
     list->numberOfElements++;
 }
 
+// returns the size of the linked list
 int lengthOfLinkedList(LinkedList* list) {
     return list->numberOfElements;
 }
 
+// outputs the linked list to the console
 void printLinkedList(LinkedList* list) {
     Node* temp1 = list->head;
     for (int i = 0; i < list->numberOfElements; i++) {
@@ -68,7 +70,8 @@ void printLinkedList(LinkedList* list) {
     printf("\n");
 }
 
-double getElementLinkedList(LinkedList* list, int position) {
+// retrieves element at a given position
+void* getElementLinkedList(LinkedList* list, int position) {
     Node* temp1 = list->head;
     for (int i = 0; i < position; i++) {
         temp1 = temp1->next;
@@ -76,6 +79,7 @@ double getElementLinkedList(LinkedList* list, int position) {
     return temp1->data;
 }
 
+// deletes element at a given position
 void deleteElementLinkedList(LinkedList* list, int position) {
     Node* temp1 = list->head;
     if (position == 0) {
@@ -97,9 +101,11 @@ void deleteElementLinkedList(LinkedList* list, int position) {
     list->numberOfElements--;
 }
 
-void insertElementLinkedList(LinkedList* list, int position, double element) {
+// adds element at a given position
+void insertElementLinkedList(LinkedList* list, int position, void* element, ElementType type) {
     Node* temp1 = list->head;
     Node* new = (Node*)malloc(sizeof(Node));
+    temp1->type = type;
 
     new->data = element;
     new->next = NULL;
@@ -117,8 +123,10 @@ void insertElementLinkedList(LinkedList* list, int position, double element) {
     list->numberOfElements++;
 }
 
-void changeElementLinkedList(LinkedList* list, int position, double newElement) {
+// changes element at a given position
+void changeElementLinkedList(LinkedList* list, int position, void* newElement, ElementType type) {
     Node* temp1 = list->head;
+    temp1->type = type;
 
     for (int i = 0; i < position; i++) {
         temp1 = temp1->next;
@@ -126,52 +134,7 @@ void changeElementLinkedList(LinkedList* list, int position, double newElement) 
     temp1->data = newElement;
 }
 
-int findElementLinkedList(LinkedList* list, double element) {
-    Node* temp1 = list->head;
-
-    for (int i = 0; i < list->numberOfElements; i++) {
-        if (temp1->data <= element + .1 && temp1->data >= element - .1) {
-            return i;
-        }
-        temp1 = temp1->next;
-    }
-    return -1;
-}
-
-void selSortLinkedList(LinkedList* list) {
-    Node* temp1 = list->head;
-    Node* temp2 = list->head;
-    Node* temp3 = list->head;
-
-    for (int i = 0; i < list->numberOfElements - 1; i++) {
-        for (int j = i; j < list->numberOfElements; j++) {
-            if (temp3->data < temp2->data) {
-                temp2 = temp3;
-            }
-            temp3 = temp3->next;
-        }
-        double temp = temp2->data;
-        temp2->data = temp1->data;
-        temp1->data = temp;
-        temp1 = temp1->next;
-        temp3 = temp1;
-        temp2 = temp1;
-    }
-}
-
-void insertSortLinkedList(LinkedList* list) {
-    Node* temp1 = list->head;
-
-    for (int i = 0; i < list->numberOfElements - 1; i++) {
-        temp1 = list->head;
-        for (int j = i; j < list->numberOfElements - 1; j++) {
-            temp1 = temp1->next;
-        }
-        while (temp1->next != NULL && temp1->data > temp1->next->data) {
-            double soup = temp1->data;
-            temp1->data = temp1->next->data;
-            temp1->next->data = soup;
-            temp1 = temp1->next;
-        }
-    }
+// determines if the list is empty
+bool isEmpty(LinkedList* list) {
+    return list->numberOfElements = 0;
 }
