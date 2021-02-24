@@ -4,6 +4,8 @@
  * Section: T5
  * Project: PEX 3 - RPN Calculator
  * Purpose: List ADT as linked list
+ * Documentation: C3C Garbrecht helped me to account for each of the data types
+ * in my functions. No additional help was received.
  * ===========================================================
  */
 #include "listAsLinkedList.h"
