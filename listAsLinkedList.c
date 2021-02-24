@@ -64,15 +64,18 @@ int lengthOfLinkedList(LinkedList* list) {
 // outputs the linked list to the console
 void printLinkedList(LinkedList* list) {
     Node* temp1 = list->head;
+    printf("'");
     for (int i = 0; i < list->numberOfElements; i++) {
         if (temp1->type == REAL_NUMBER) {
-            printf("%.3lf, ", *(double*)temp1->data);
+            printf("%.3lf -> ", *(double*)temp1->data);
         }
         else {
-            printf("%c, ", *(char*)temp1->data);
+            printf("%c -> ", *(char*)temp1->data);
         }
         temp1 = temp1->next;
     }
+    printf("NULL");
+    printf("'");
     printf("\n");
 }
 
