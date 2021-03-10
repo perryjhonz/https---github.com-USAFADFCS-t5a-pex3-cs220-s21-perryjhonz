@@ -18,7 +18,7 @@ void inputToken(QueueAsLinkedList* queue, char input[50]) {
     char* strToken;
 
     // String is tokenized and is ran until completed
-    strToken = strtok(input, "\n");
+    strToken = strtok(input, "\n ");
     while (strToken != NULL) {
         // Sends all numbers to queue
         if (atof(strToken) != 0) {
@@ -54,3 +54,7 @@ void inputToken(QueueAsLinkedList* queue, char input[50]) {
     }
 }
 
+void rpnCalculation(QueueAsLinkedList* queue, StackAsLinkedList* stack) {
+    ElementType type = REAL_NUMBER; // MATH_OPERATOR vs REAL_NUMBER
+    void* element = NULL;
+}

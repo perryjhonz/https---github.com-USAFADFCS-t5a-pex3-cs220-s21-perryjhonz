@@ -11,12 +11,14 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 // initializes the queue structure
 QueueAsLinkedList* queueInit() {
     QueueAsLinkedList* queue = (QueueAsLinkedList*)malloc(sizeof(QueueAsLinkedList));
-    queue->head = -1;
-    queue->tail = -1;
+    queue->head = NULL;
+    queue->tail = NULL;
+    queue->numberOfElements = 0;
 
     return queue;
 }
@@ -28,7 +30,10 @@ void queueEnqueue(QueueAsLinkedList* queue, void* element, ElementType type) {
 
 // removes an element from the front of the queue
 void* queueDequeue(QueueAsLinkedList* queue, ElementType* type) {
-    deleteElementLinkedList(queue, queue->head);
+    void* ptr = getElementLinkedList(queue, 0, type);
+
+    deleteElementLinkedList(queue, 0);
+    return ptr;
 }
 
 // determines if the queue is empty
@@ -55,14 +60,12 @@ void deleteQueue(QueueAsLinkedList* queue) {
 
 // returns the item in the front of the queue but doesn't remove it
 void* queuePeek(QueueAsLinkedList* queue, ElementType* type) {
-    getElementLinkedList(queue, queue->head, type);
+    return getElementLinkedList(queue, 0, type);
 }
 
 // determines the size of the queue
 int queueSize(QueueAsLinkedList* queue) {
-    lengthOfLinkedList(queue);
-
-    return queueSize(queue);
+    return lengthOfLinkedList(queue);
 }
 
 // outputs the queue to the console

@@ -19,12 +19,15 @@ StackAsLinkedList* stackInit() {
 
 // puts an element onto the top of the stack
 void stackPush(StackAsLinkedList* stack, void* element, ElementType type) {
-    insertElementLinkedList(stack, stack->head, element, type);
+    insertElementLinkedList(stack, 0, element, type);
 }
 
 // pops an element off the stack
 void* stackPop(StackAsLinkedList* stack, ElementType* type) {
-    deleteElementLinkedList(stack, stack->tail);
+    void* ptr = getElementLinkedList(stack, 0, type);
+    deleteElementLinkedList(stack, 0);
+
+    return ptr;
 }
 
 // determines if the stack is empty
@@ -49,14 +52,12 @@ void deleteStack(StackAsLinkedList* stack) {
 
 // returns the item on the top of the stack but doesn't remove it
 void* stackPeek(StackAsLinkedList* stack, ElementType* type) {
-    getElementLinkedList(stack, stack->head, type);
+    return getElementLinkedList(stack, 0, type);
 }
 
 // determines the size of the stack
 int stackSize(StackAsLinkedList* stack) {
-    lengthOfLinkedList(stack);
-
-    return stackSize(stack);
+    return lengthOfLinkedList(stack);
 }
 
 // outputs the stack to the console
