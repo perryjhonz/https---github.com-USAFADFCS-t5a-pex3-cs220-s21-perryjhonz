@@ -28,6 +28,8 @@ int main() {
 
         inputToken(queke, input);
         printf("\n");
+        rpnCalculation(queke, steck);
+        printf("\n");
 
     } while(input[0] != '\n');
 

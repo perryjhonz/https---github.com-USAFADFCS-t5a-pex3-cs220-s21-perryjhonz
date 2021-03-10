@@ -30,6 +30,9 @@ void queueEnqueue(QueueAsLinkedList* queue, void* element, ElementType type) {
 
 // removes an element from the front of the queue
 void* queueDequeue(QueueAsLinkedList* queue, ElementType* type) {
+    if (queueIsEmpty(queue)) {
+        return NULL;
+    }
     void* ptr = getElementLinkedList(queue, 0, type);
 
     deleteElementLinkedList(queue, 0);
@@ -38,7 +41,7 @@ void* queueDequeue(QueueAsLinkedList* queue, ElementType* type) {
 
 // determines if the queue is empty
 bool queueIsEmpty(QueueAsLinkedList* queue) {
-    return queue->numberOfElements = 0;
+    return queue->numberOfElements == 0;
 }
 
 // determines if the queue is full

@@ -99,7 +99,6 @@ void deleteElementLinkedList(LinkedList* list, int position) {
     Node* temp1 = list->head;
     if (position == 0) {
         list->head = list->head->next;
-        free(temp1->data);
         free(temp1);
     }
     else {

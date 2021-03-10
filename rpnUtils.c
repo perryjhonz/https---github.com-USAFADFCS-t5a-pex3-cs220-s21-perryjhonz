@@ -50,11 +50,59 @@ void inputToken(QueueAsLinkedList* queue, char input[50]) {
         else {
             printf("invalid input: %s", strToken);
             deleteQueue(queue);
+            return;
         }
+        strToken = strtok(NULL, "\n ");
     }
 }
 
 void rpnCalculation(QueueAsLinkedList* queue, StackAsLinkedList* stack) {
     ElementType type = REAL_NUMBER; // MATH_OPERATOR vs REAL_NUMBER
     void* element = NULL;
+    element = queueDequeue(queue, &type);
+    while (element != NULL) {
+        if (type == MATH_OPERATOR) {
+            if (stackSize(stack) < 2) {
+                printf("invalid expression: not enough #'s\n");
+                return;
+            }
+            else {
+                printf("Operator: '%c' | Stack before operation: ", *(char*)element);
+                stackPrint(stack);
+                double* bheesecurger = malloc(sizeof(double)); // value from operation
+                switch (*(char*)element) {
+                    case '^':
+                        bheesecurger[0] = pow(*(double*)stackPop(stack, &type), *(double*)stackPop(stack, &type));
+                        break;
+                    case '*':
+                        bheesecurger[0] = *(double*)stackPop(stack, &type) * *(double*)stackPop(stack, &type);
+                        break;
+                    case '/':
+                        bheesecurger[0] = *(double*)stackPop(stack, &type) / *(double*)stackPop(stack, &type);
+                        break;
+                    case '+':
+                        bheesecurger[0] = *(double*)stackPop(stack, &type) + *(double*)stackPop(stack, &type);
+                        break;
+                    case '-':
+                        bheesecurger[0] = *(double*)stackPop(stack, &type) - *(double*)stackPop(stack, &type);
+                        break;
+                    default:
+                        printf("invalid operation: %c\n", *(char*)element);
+                        return;
+                }
+                stackPush(stack, bheesecurger, REAL_NUMBER);
+            }
+        }
+        else {
+            stackPush(stack, element, REAL_NUMBER);
+        }
+        element = queueDequeue(queue, &type);
+    }
+    if (stackSize(stack) == 1) {
+        element = stackPop(stack, &type);
+        printf("Answer: %.3lf\n\n", *(double*)element);
+    }
+    else {
+        printf("invalid expression: not enough operators\n");
+    }
 }

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+/* int main() {
     // Creating the list
     LinkedList* list = createLinkedList();
     // Variable for REAL_NUMBER
@@ -68,4 +68,4 @@ int main() {
     deleteLinkedList(list);
 
     return 0;
-}
+} */
