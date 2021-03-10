@@ -19,7 +19,7 @@ typedef LinkedList StackAsLinkedList;  // define Stack datatype as LinkedList
 
 /** stackPush()
  * @brief - puts an element onto the top of the stack
- * @param element - ptr to thethe value to push onto the stack
+ * @param element - ptr to the value to push onto the stack
  * @param type - ElementType, REAL_NUMBER or MATH_OPERATOR
  * @pre   - 1. void* pointing to dynamically allocated element
  *          2. stack before element added

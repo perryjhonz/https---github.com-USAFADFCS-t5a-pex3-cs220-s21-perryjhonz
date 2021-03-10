@@ -5,6 +5,10 @@
  * Project: PEX 3 - RPN Calculator
  * Purpose: Calculate answer given input in
  *          reverse polish notation
+ * Documentation: C3C Brayboy helped me to include my test functions as well
+ * as the string token functions that I needed for the queue. C3C Garbrecht helped me
+ * to include the arithmetic that I needed for each of my math operators (i.e., +, -, *, /, ^).
+ * No additional help was received.
  * ===========================================================
  */
 
@@ -19,7 +23,7 @@
 int main() {
     char input[50]; // User input as an array
     do {
-        printf("Enter a RPN expression: ");
+        printf("Enter the RPN expression: ");
         fgets(input, sizeof(input), stdin);
         fflush(stdin);
 
@@ -28,6 +32,7 @@ int main() {
 
         inputToken(queke, input);
         printf("\n");
+
         rpnCalculation(queke, steck);
         printf("\n");
 
