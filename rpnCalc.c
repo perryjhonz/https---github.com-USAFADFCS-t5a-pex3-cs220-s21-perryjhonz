@@ -13,10 +13,7 @@
 // what includes do we need here?
 
 #include "rpnUtils.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
+
 
 /* int main() {
     return 0;  // return success
